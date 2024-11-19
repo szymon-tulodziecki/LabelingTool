@@ -235,25 +235,33 @@ class ImageLabelingApp(QMainWindow):
 
     def save_annotations(self):
         if not self.bboxes:
-            # If there are no bounding boxes, display a message
             error_message = QLabel("Please add at least one bounding box!", self)
             error_message.setStyleSheet("color: red; font-size: 16px; font-weight: bold;")
-            self.statusBar().clearMessage()  # Clear any old messages
-            self.statusBar().showMessage("Please add at least one bounding box!", 3000)  # Show message for 3 seconds
-            return  # Do not save if there are no bounding boxes
+            self.statusBar().clearMessage()
+            self.statusBar().showMessage("Please add at least one bounding box!", 3000)
+            return
 
-        # Continue saving if there are bounding boxes
         annotations = []
         for bbox in self.bboxes:
             rect = bbox['item'].rect()
+            x, y, width, height = rect.x(), rect.y(), rect.width(), rect.height()
+
+            # Validate coordinates to ensure they are within image bounds
+            x = max(0, x)
+            y = max(0, y)
+            width = min(self.image.width() - x, width)
+            height = min(self.image.height() - y, height)
+
             annotations.append({
                 'class': bbox['class'],
-                'bbox': [rect.x(), rect.y(), rect.width(), rect.height()]
+                'bbox': [x, y, width, height]
             })
+
         image_data = {
             'image': self.image_list[self.current_image_index],
             'annotations': annotations
         }
+
         if os.path.exists(self.annotation_file):
             with open(self.annotation_file, 'r') as f:
                 existing_data = json.load(f)
