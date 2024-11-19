@@ -112,7 +112,7 @@ class ImageLabelingApp(QMainWindow):
 
         self.annotation_file = os.path.join(os.getcwd(), "annotations.json")
         self.vehicle_classes = ['passenger', 'SUV/off-road', 'delivery', 'special', 'truck']
-        self.colors = ['#3498db', '#2ecc71', '#e74c3c', '#f1c40f', '#9b59b6']
+        self.colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#000000', '#FFFFFF']
         self.current_color_index = 0
         self.zoom_factor = 1.0
         self.min_zoom = 0.2
