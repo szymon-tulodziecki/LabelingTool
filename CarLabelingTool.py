@@ -112,7 +112,7 @@ class ImageLabelingApp(QMainWindow):
 
         self.annotation_file = os.path.join(os.getcwd(), "annotations.json")
         self.vehicle_classes = ['passenger', 'SUV/off-road', 'delivery', 'special', 'truck']
-        self.colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#000000', '#FFFFFF']
+        self.colors = ['#00FF99', '#FF6600', '#3366FF', '#FF0066', '#33FFCC', '#9900FF', '#CCCC00', '#FFCCFF']
         self.current_color_index = 0
         self.zoom_factor = 1.0
         self.min_zoom = 0.2
@@ -179,6 +179,7 @@ class ImageLabelingApp(QMainWindow):
         if self.current_image_index < len(self.image_list):
             image_path = os.path.join(self.image_folder, self.image_list[self.current_image_index])
             image = QImage(image_path)
+            self.current_image = image  # Store the image for later use
             pixmap = QPixmap.fromImage(image)
 
             # Automatically scale the image to the view
@@ -249,8 +250,8 @@ class ImageLabelingApp(QMainWindow):
             # Validate coordinates to ensure they are within image bounds
             x = max(0, x)
             y = max(0, y)
-            width = min(self.image.width() - x, width)
-            height = min(self.image.height() - y, height)
+            width = min(self.current_image.width() - x, width)
+            height = min(self.current_image.height() - y, height)
 
             annotations.append({
                 'class': bbox['class'],
