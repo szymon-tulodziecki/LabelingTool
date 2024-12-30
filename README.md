@@ -17,7 +17,7 @@ This is a PyQt5-based application for labeling images with bounding boxes. The a
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/szymon-tulodziecki/CarLabelingTool.git
+    git clone https://github.com/szymon-tulodziecki/LabelingTool.git
     cd CarLabelingTool
     ```
 
@@ -36,7 +36,7 @@ This is a PyQt5-based application for labeling images with bounding boxes. The a
 
 1. Run the application:
     ```sh
-    python CarLabelingTool/CarLabelingTool.py
+    python CarLabelingTool/LabelingTool.py
     ```
 
 2. Select the folder containing the images you want to label.
@@ -45,7 +45,7 @@ This is a PyQt5-based application for labeling images with bounding boxes. The a
 
 ## File Structure
 
-- `CarLabelingTool/CarLabelingTool.py`: Main application code.
+- `CarLabelingTool/LabelingTool.py`: Main application code.
 - `annotations.json`: File where annotations are saved.
 
 ## Dependencies
